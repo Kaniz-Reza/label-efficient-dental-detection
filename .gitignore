@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Model checkpoints and weights (too large for git; published as Kaggle datasets instead)
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Large media
+*.mp4
+*.avi
+*.mov
+
+# Logs
+*.log
