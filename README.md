@@ -174,7 +174,5 @@ See `report/Dental-Detection-Report.pdf` for the complete write-up: methodology,
 breakdowns, embedding diagnostics for every SSL method, the full tracking analysis, and
 discussion connecting each method's mechanism to its observed performance.
 
-## Author
 
-**Group J** — CSE 445 (Computer Vision), East West University
-Kaniz Reza Mithila · Farha Anjum Afifa · Rukaiah Bintay Morshed · Redwan Ahmed
+ 
