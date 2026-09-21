@@ -1,0 +1,30 @@
+# Core scientific stack
+numpy
+pandas
+matplotlib
+scikit-learn
+Pillow
+PyYAML
+
+# Computer vision / object detection
+opencv-python
+ultralytics
+
+# Self-supervised learning / transformers
+torch
+timm
+transformers @ git+https://github.com/huggingface/transformers.git
+huggingface_hub
+albumentations
+
+# Dataset splitting
+iterative-stratification
+
+# Tracking evaluation
+motmetrics
+
+# Note: these notebooks were run on Kaggle (T4 GPU), which provides PyTorch,
+# CUDA, and most of the above pre-installed. Exact versions were whatever
+# Kaggle's Python Docker image provided at the time of each run; none were
+# explicitly pinned in the notebooks. `transformers` needs the development
+# branch (not a PyPI release) for DINOv3 support.
