@@ -1,0 +1,40 @@
+## Video Source
+
+Since dental panoramic X-rays are inherently static, single-capture images with no natural 
+video analogue, we constructed a synthetic tracking video following the spec's fallback 
+provision for cases where no suitable real video exists. Five real test-set X-ray images 
+(chosen for high instance density and full four-class coverage: Cavities, Damage, Infection, 
+Wisdom) were tiled into a wide canvas (3200×640px), and a virtual camera window (640×640px) 
+was panned linearly across the canvas over 20 seconds at 24fps (480 frames total). Because 
+the canvas was built directly from real, human-annotated ground-truth boxes, we can compute 
+exact frame-level ground truth for every object throughout the video — enabling full MOTA/ 
+MOTP/IDF1 evaluation rather than proxy metrics alone.
+
+
+## Tracking Analysis — Results & Discussion
+
+**Quantitative results (synthetic video, ground-truth available):** MOTA=0.047, MOTP=0.300, 
+IDF1=0.137, ID switches=0, mostly-tracked=5/45 objects, mostly-lost=39/45, fragmentations=22.
+
+**Interpretation:** The near-zero ID switch count indicates ByteTrack's association logic 
+performed reliably whenever detections were available — the tracker never confused one object's 
+identity for another's. The low MOTA and high mostly-lost count instead trace directly back to 
+detection coverage: the detector produced predictions in only 296/480 frames (62%), with 
+extended gaps (e.g., frames 92-149) where zero detections occurred despite ground-truth objects 
+being present throughout.
+
+We attribute this primarily to a domain/framing mismatch introduced by the synthetic panning 
+process: while our source images are real, correctly-labelled dental X-rays, the panning camera 
+window rarely aligns with a source image's original 640×640 framing, instead showing 
+horizontally shifted crops. Since the detector was trained and evaluated exclusively on 
+full, centred X-ray crops, this shift constitutes a distribution mismatch the model had not 
+seen — directly analogous to how camera motion or partial occlusion degrades detection in 
+real-world tracking footage, even though our source domain is technically identical to training 
+data.
+
+**Detector quality → tracking quality:** this result directly illustrates the tracking-by-detection 
+paradigm's core dependency: ByteTrack's association algorithm performed its job correctly 
+(zero ID switches), but track quality is fundamentally bounded by detection recall. A detector 
+with imperfect robustness to framing shift — itself a consequence of the 20%-label-budget 
+constraint studied throughout this project — propagates directly into fragmented, frequently-lost 
+tracks, even under a well-behaved, low-error tracking algorithm.

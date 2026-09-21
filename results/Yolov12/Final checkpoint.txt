@@ -1,0 +1,6 @@
+Final test-split metrics:
+  Precision: 0.655 | Recall: 0.572 | F1: 0.611
+  mAP@50: 0.481 | mAP@50-95: 0.226
+  Inference speed: 24.4 FPS
+
+
